@@ -1,6 +1,5 @@
 <?php
 
-use App\Events\AccountOpened;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,14 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/fire', function () {
-    \App\Events\BalanceIncreased::commit(
-        account_id: 1,
-        score: 15,
-        description: 'Was nice to me',
-    );
     return view('welcome');
 });

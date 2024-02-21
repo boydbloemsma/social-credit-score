@@ -5,14 +5,17 @@ namespace App\Events;
 use App\States\AccountState;
 use App\Models\Account;
 use Thunk\Verbs\Attributes\Autodiscovery\StateId;
+use Thunk\Verbs\CommitsImmediately;
 use Thunk\Verbs\Event;
 
-class AccountOpened extends Event
+class AccountOpened extends Event implements CommitsImmediately
 {
     #[StateId(AccountState::class)]
     public int $account_id;
 
-    public string $description;
+    public string $account_name;
+
+    public string $description = 'Initial deposit.';
 
     public int $initial_deposit = 500;
 
@@ -30,6 +33,7 @@ class AccountOpened extends Event
     {
         Account::create([
             'id' => $this->account_id,
+            'name' => $this->account_name,
             'balance' => $this->initial_deposit,
         ]);
     }
